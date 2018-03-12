@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package classes;
+package com.senac.webprodutos.model;
+
+import java.security.Timestamp;
 
 /**
  *
@@ -17,6 +19,7 @@ public class Produto {
    private double precoCompra;
    private int qtde;
    private String categoria;
+   private Timestamp dataCadastro;
 
     public int getId() {
         return id;
@@ -72,6 +75,14 @@ public class Produto {
 
     public void setQtde(int qtde) {
         this.qtde = qtde;
+    }
+
+    public Timestamp getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(Timestamp dataCadastro) {
+        this.dataCadastro = dataCadastro;
     }
     
     
