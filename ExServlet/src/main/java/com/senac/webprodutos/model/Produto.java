@@ -19,7 +19,7 @@ public class Produto {
    private double precoCompra;
    private int qtde;
    private String categoria;
-   private Timestamp dataCadastro;
+   private String dataCadastro;
 
     public int getId() {
         return id;
@@ -77,11 +77,11 @@ public class Produto {
         this.qtde = qtde;
     }
 
-    public Timestamp getDataCadastro() {
+    public String getDataCadastro() {
         return dataCadastro;
     }
 
-    public void setDataCadastro(Timestamp dataCadastro) {
+    public void setDataCadastro(String dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
     

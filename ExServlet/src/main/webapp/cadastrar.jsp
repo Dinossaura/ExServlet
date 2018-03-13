@@ -219,7 +219,7 @@
             <div class="row">              
                 <div class="col-12">
                     <h2>Cadastro de Produtos</h2>  
-                    <form action="${pageContext.request.contextPath}/cadastro-produto" method="post">
+                    <form action="${pageContext.request.contextPath}/cadastrar-produto" method="post">
                    
                     <div  class="form-group col-sm-12 row">
 
