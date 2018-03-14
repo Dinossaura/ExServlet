@@ -277,7 +277,7 @@
                                 <input type="text" name="produto" class="form-control" value="${pro.getNome()}" id="produto" required oninvalid="this.setCustomValidity('Preencha o nome')" oninput="setCustomValidity('')" maxlength="30"/> 
                         
                                 <label for="descricao">Descrição*</label>
-                                <textarea class="form-control" rows="1" name="descricao" value="${pro.getDesc()}" id="descricao" required oninvalid="this.setCustomValidity('Preencha a Descrição')" oninput="setCustomValidity('')" maxlength="200"/></textarea> 
+                                <textarea class="form-control" rows="1" name="descricao" id="descricao" required oninvalid="this.setCustomValidity('Preencha a Descrição')" oninput="setCustomValidity('')" maxlength="200"/>${pro.getDesc()}</textarea> 
                         
                             </div>
                         
@@ -291,15 +291,7 @@
                                 <label for="qtd">Quantidade*</label>
                                 <input class="form-control" name="quantidade" value="${pro.getQtde()}" id="quantidaprod" onkeydown="javascript: fMasc(this, mNum)" maxlength="10" required oninvalid="this.setCustomValidity('Preencha a Quantidade')" oninput="setCustomValidity('')"/>
                             </div>
-                        
-                            <div class="form-group col-sm-12 row">
-                                <label for="categoria">Categoria*</label>
-                                Cat Um <input type="checkbox" name="categvalor1" value="1">
-                                Cat Dois<input type="checkbox" name="categvalor2" value="2">
-                                Cat Três<input type="checkbox" name="categvalor3" value="3">
-                                Cat Quatro<input type="checkbox" name="categvalor4" value="4">
-                                Cat Cinco<input type="checkbox" name="categvalor5" value="5">
-                            </div> 
+
                             <div class="form-group">
                                 <button type="submit" class="btn btn-default" id="botao">Cadastrar</button>
                             </div>

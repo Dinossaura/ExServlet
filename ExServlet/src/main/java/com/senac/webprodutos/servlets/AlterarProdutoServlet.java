@@ -78,44 +78,18 @@ public class AlterarProdutoServlet extends HttpServlet {
             p = (Produto) sessao.getAttribute("pro");
             request.setCharacterEncoding("UTF-8");
             String nomeProduto = request.getParameter("produto").toLowerCase();
-        String descProduto = request.getParameter("descricao").toLowerCase();
-        
-        String cat1 = request.getParameter("categvalor1");
-        String cat2 = request.getParameter("categvalor2");
-        String cat3 = request.getParameter("categvalor3");
-        String cat4 = request.getParameter("categvalor4");
-        String cat5 = request.getParameter("categvalor5");
-        
-        if(cat1 != null){
-            categoria.add(cat1);
-        }
-        
-        if (cat2 != null){
-            categoria.add(cat2);
-        }
-        if (cat3 != null){
-            categoria.add(cat3);
-        }
-        if (cat4 != null){
-            categoria.add(cat4);
-        }
-        
-        if(cat5 != null){
-            categoria.add(cat5);
-        }
-        
-        String precocompra = request.getParameter("precocompra");
-        precocompra = precocompra.replace(".", "");
-        precocompra = precocompra.replace(",", ".");
-        String precovenda = request.getParameter("precovenda");
-        precovenda = precovenda.replace(".", "");
-        precovenda =precovenda.replace(",", ".");
-       String quantidade = request.getParameter("quantidade");
+            String descProduto = request.getParameter("descricao").toLowerCase();
+            String precocompra = request.getParameter("precocompra");
+            precocompra = precocompra.replace(".", "");
+            precocompra = precocompra.replace(",", ".");
+            String precovenda = request.getParameter("precovenda");
+            precovenda = precovenda.replace(".", "");
+            precovenda =precovenda.replace(",", ".");
+            String quantidade = request.getParameter("quantidade");
         
             //Verifica campos obrigatórios
             if((nomeProduto.length() == 0)||(descProduto.length() == 0)||
-                    (categoria.isEmpty())||(precocompra.length() == 0)||
-                    (precovenda.length() == 0)){
+               (precocompra.length() == 0)||(precovenda.length() == 0)){
                 sessao.setAttribute("mensagemErroCampos", "Verifique campos obrigatórios!");
                 RequestDispatcher dispatcher
                 = request.getRequestDispatcher("/cadastrar.jsp");
@@ -126,7 +100,6 @@ public class AlterarProdutoServlet extends HttpServlet {
                 try{
                     p.setNome(nomeProduto);
                     p.setDesc(descProduto);
-                    p.setCategoria(categoria);
                     p.setQtde(Integer.parseInt(quantidade));
                     p.setPrecoCompra(Double.parseDouble(precocompra));
                     p.setPrecoVenda(Double.parseDouble(precovenda));
@@ -134,7 +107,7 @@ public class AlterarProdutoServlet extends HttpServlet {
                 sp.atualizarProduto(p);
                 } catch (Exception e) {
                 }
-                response.sendRedirect(request.getContextPath() + "/consultarProduto.jsp");
+                response.sendRedirect(request.getContextPath() + "/listar.jsp");
                 sessao.removeAttribute("Altera");
             }
             

@@ -64,19 +64,10 @@ public class ProdutoDAO {
     //atualiza produto
     public Produto updateProduto(Produto produto) throws Exception{
         System.out.println("Atualizando produto...");
-         String query = "UPDATE produtos SET nome=?, descricao=?, preco_compra=?, preco_venda=?, quantidade=? WHERE id=?";
-         String query2 = "UPDATE  produto_categoria SET id_categoria = ? WHERE id_produto = ? and id_categoria = ?";
+         String query = "UPDATE produto SET nome=?, descricao=?, preco_compra=?, preco_venda=?, quantidade=? WHERE id=?";
         
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            PreparedStatement ps = conn.prepareStatement(query2, Statement.RETURN_GENERATED_KEYS);
-            
-            for(int i = 0; i < produto.getCategoria().size(); i++){
-                ps.setInt(1, Integer.parseInt(produto.getCategoria().get(i)));//Código categoria
-                ps.setInt(1, produto.getId());//Código Produto
-                ps.setInt(1, Integer.parseInt(produto.getCategoria().get(i)));//Código categoria
-                ps.executeUpdate();
-            }
             
             preparedStatement.setString(1, produto.getNome());
             preparedStatement.setString(2, produto.getDesc());
@@ -179,17 +170,23 @@ public class ProdutoDAO {
         Produto pretorno = new Produto();
         System.out.println("Buscando produto na base de dados...");
         String query = "";
+        ArrayList<String> categoria = new ArrayList();
        
         query = "SELECT * FROM produto WHERE id = ?";
-       
+        String query2 = "SELECT * FROM produto_categoria WHERE id_produto = ?";
         
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-
+            PreparedStatement ps = conn.prepareStatement(query2, Statement.RETURN_GENERATED_KEYS);
+            
             preparedStatement.setInt(1, codigoProduto); 
-         
-                        
+            ps.setInt(1, codigoProduto);
+            
+            
             ResultSet rs = preparedStatement.executeQuery();
+            ResultSet rs2 = ps.executeQuery();
+            
+            
             
             while (rs.next()){
                 Produto produto = new Produto();
@@ -200,6 +197,12 @@ public class ProdutoDAO {
                 produto.setPrecoVenda(rs.getDouble(5));
                 produto.setQtde(rs.getInt(6));
                 produto.setDataCadastro(rs.getString(7));
+                
+                while(rs2.next()){
+                  categoria.add(rs2.getString(2));
+                    
+                }
+                produto.setCategoria(categoria);
                 
                 pretorno = produto;
             }
