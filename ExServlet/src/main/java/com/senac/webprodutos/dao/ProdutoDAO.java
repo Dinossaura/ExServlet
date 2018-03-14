@@ -45,9 +45,11 @@ public class ProdutoDAO {
             
             PreparedStatement ps = conn.prepareStatement(query2, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, ultimocodigo);
-            ps.setInt(2, Integer.parseInt(produto.getCategoria()));
             
-            ps.executeUpdate();
+            for(int i = 0; i < produto.getCategoria().size(); i++){
+                ps.setInt(2, Integer.parseInt(produto.getCategoria().get(i)));
+                ps.executeUpdate();
+            }
             
             ps.close();
             preparedStatement.close();

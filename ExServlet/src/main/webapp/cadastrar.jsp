@@ -243,14 +243,12 @@
                     </div>
                         
                     <div class="form-group col-sm-12 row">
-                        <label for="categoria">Categoria*</label>
-                            <select class="form-control" name="categ" id="categoria">
-                                <option value="1">Cat Um</option>
-                                <option value="2">Cat Dois</option>
-                                <option value="3">Cat três</option>
-                                <option value="4">Cat Quatro</option>
-                                <option value="5">Cat Cinco</option>
-                            </select>
+                        <label for="categoria">Categoria*</label> <br>
+                        Cat Um <input type="checkbox" name="categvalor1" value="1"><br/>
+                        Cat Dois<input type="checkbox" name="categvalor2" value="2"><br/>
+                        Cat Três<input type="checkbox" name="categvalor3" value="3"><br/>
+                        Cat Quatro<input type="checkbox" name="categvalor4" value="4"><br/>
+                        Cat Cinco<input type="checkbox" name="categvalor5" value="5"><br/>
                     </div> 
                     <div class="form-group">
                         <button type="submit" class="btn btn-default" id="botao">Cadastrar</button>

@@ -6,6 +6,7 @@
 package com.senac.webprodutos.model;
 
 import java.security.Timestamp;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,7 +19,7 @@ public class Produto {
    private double precoVenda;
    private double precoCompra;
    private int qtde;
-   private String categoria;
+   private ArrayList<String> categoria;
    private String dataCadastro;
 
     public int getId() {
@@ -61,11 +62,11 @@ public class Produto {
         this.precoCompra = precoCompra;
     }
 
-    public String getCategoria() {
+    public ArrayList<String> getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(ArrayList<String> categoria) {
         this.categoria = categoria;
     }
 
@@ -84,6 +85,7 @@ public class Produto {
     public void setDataCadastro(String dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
+
     
     
     

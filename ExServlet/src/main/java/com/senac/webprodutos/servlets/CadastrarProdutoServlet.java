@@ -11,6 +11,8 @@ import com.senac.webprodutos.service.ServicoProduto;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,10 +39,35 @@ public class CadastrarProdutoServlet extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         HttpSession sessao = request.getSession();
-                
+        ArrayList<String> categoria = new ArrayList(); 
+        
         String nomeProduto = request.getParameter("produto").toLowerCase();
         String descProduto = request.getParameter("descricao").toLowerCase();
-        String cat = request.getParameter("categ");
+        
+        String cat1 = request.getParameter("categvalor1");
+        String cat2 = request.getParameter("categvalor2");
+        String cat3 = request.getParameter("categvalor3");
+        String cat4 = request.getParameter("categvalor4");
+        String cat5 = request.getParameter("categvalor5");
+        
+        if(cat1 != null){
+            categoria.add(cat1);
+        }
+        
+        if (cat2 != null){
+            categoria.add(cat2);
+        }
+        if (cat3 != null){
+            categoria.add(cat3);
+        }
+        if (cat4 != null){
+            categoria.add(cat4);
+        }
+        
+        if(cat5 != null){
+            categoria.add(cat5);
+        }
+        
         String precocompra = request.getParameter("precocompra");
         precocompra = precocompra.replace(".", "");
         precocompra = precocompra.replace(",", ".");
@@ -51,7 +78,7 @@ public class CadastrarProdutoServlet extends HttpServlet {
        
         //Verifica campos obrigatórios
             if((nomeProduto.length() == 0)||(descProduto.length() == 0)||
-                    (cat.length() == 0)||(precocompra.length() == 0)||
+                    (categoria.isEmpty())||(precocompra.length() == 0)||
                     (precovenda.length() == 0)){
                 sessao.setAttribute("mensagemErroCampos", "Verifique campos obrigatórios!");
                 RequestDispatcher dispatcher
@@ -71,7 +98,7 @@ public class CadastrarProdutoServlet extends HttpServlet {
                      Produto p = new Produto();
                      p.setNome(nomeProduto);
                      p.setDesc(descProduto);
-                     p.setCategoria(cat);
+                     p.setCategoria(categoria);
                      p.setQtde(Integer.parseInt(quantidade));
                      p.setPrecoCompra(Double.parseDouble(precocompra));
                      p.setPrecoVenda(Double.parseDouble(precovenda));
