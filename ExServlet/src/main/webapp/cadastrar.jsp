@@ -293,7 +293,7 @@
                             </div>
 
                             <div class="form-group">
-                                <button type="submit" class="btn btn-default" id="botao">Cadastrar</button>
+                                <button type="submit" class="btn btn-default" id="botao">Alterar</button>
                             </div>
                             <label id="mensagem">(*)Campos Obrigatórios</label>
                     

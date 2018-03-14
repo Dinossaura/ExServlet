@@ -8,7 +8,23 @@
     <packaging>war</packaging>
 
     <name>ExServlet</name>
+   
 
+    <developers>
+        <developer>
+            <name>Magno Medeiros Veras</name>
+        </developer>
+        <developer>
+            <name>Everton Aparecido de Araújo</name>
+        </developer>
+        <developer>
+            <name>Mayra Pereira</name>
+        </developer>
+        <developer>
+            <name>Pedro Lucas Cruz</name>
+        </developer>
+    </developers>
+    
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
