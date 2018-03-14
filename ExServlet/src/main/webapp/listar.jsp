@@ -35,8 +35,26 @@
                      <div class="col-12 col-sm-3">
                      <table class="table table-bordered ">
                          <tr>
-                             <th><c:out value="${produto.getNome() + ' ' + produto.getDesc()}"/></th>
-                            
+                             <th>
+                                 <c:out value="Nome: ${produto.getNome()}"/> <br/>
+                                 <c:out value="Descrição: ${produto.getDesc()}"/> <br/>
+                                 <c:out value="Preço: R$ ${produto.getPrecoVenda()}"/> <br/>
+                                 <c:out value="Qtd Diponível: ${produto.getQtde()}"/><br/>
+                             
+                             
+                                 <div class="form-inline">
+                                    <form class="form-group alteracoes" action="${pageContext.request.contextPath}/alterarProduto" method="post" >
+                                        <button type="submit" name="codigoproduto" value="${produto.getId()}" 
+                                                class="btn btn-success center-block">Alterar</button>
+                                    </form>
+                                 
+                                 
+                                    <form class="form-group alteracoes" action="${pageContext.request.contextPath}/excluirProduto" method="post" >         
+                                        <button type="submit" name="codigoproduto" value="${produto.getId()}" 
+                                        class="btn btn-danger center-block">Excluir</button>
+                                    </form>
+                                 </div>
+                             </th>
                          </tr>
                      </table>
                      </div>

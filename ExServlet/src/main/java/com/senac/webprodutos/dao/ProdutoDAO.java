@@ -1,5 +1,6 @@
 package com.senac.webprodutos.dao;
 
+import com.senac.webprodutos.model.Categoria;
 import com.senac.webprodutos.model.Produto;
 import com.senac.webprodutos.utils.ConexaoBanco;
 import java.sql.Connection;
@@ -150,7 +151,6 @@ public class ProdutoDAO {
            query = "SELECT * FROM produto WHERE nome like ?";//addicionar o % % 
         }
         
-        
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             
@@ -162,7 +162,6 @@ public class ProdutoDAO {
             
             while (rs.next()){
                 Produto produto = new Produto();
-                
                 produto.setId(rs.getInt(1));
                 produto.setNome(rs.getString(2));
                 produto.setDesc(rs.getString(3));
@@ -206,16 +205,46 @@ public class ProdutoDAO {
         return encontra;
     
     }
-    //
-    public void deletarProduto(int codigo, int codigoempresa) throws Exception{
-        System.out.println("Deletando produto de codigo: "+codigo);
-        String query = "DELETE FROM produtos WHERE codigo=? and codigoempresa=?";
+    
+    public Categoria encontraCategoriasProd(int idproduto){
+        ArrayList<Categoria> lista = new ArrayList();
+        Categoria cat = new Categoria();
         
+        String query = "SELECT * FROM produto_categoria where id_produto = ?";
+        
+         try {
+            PreparedStatement preparedStatement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            
+
+            preparedStatement.setInt(1, idproduto); 
+            
+                        
+            ResultSet rs = preparedStatement.executeQuery();
+            
+            while (rs.next()){
+                cat.setId(rs.getInt(1));
+                cat.setIdproduto(rs.getInt(2));
+            }
+            
+            System.out.println("Busca efetuada com sucesso");
+        } catch (SQLException ex) {
+            System.out.println("Erro ao buscar produto"+ex);
+        }        
+        return cat;
+    }
+    //
+    public void deletarProduto(int codigo) throws Exception{
+        System.out.println("Deletando produto de codigo: "+codigo);
+        String query = "DELETE FROM produto WHERE id= ?";
+        String query2 = "DELETE FROM produto_categoria WHERE id_produto = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(query);
+            PreparedStatement ps = conn.prepareStatement(query2);
             
-            preparedStatement.setInt(1, codigo);
-            preparedStatement.setInt(2, codigoempresa);   
+            ps.setInt(1, codigo);
+            ps.execute();
+            
+            preparedStatement.setInt(1, codigo); 
             preparedStatement.execute();
             
             System.out.println("Produto deletado");

@@ -6,6 +6,8 @@
  */
 package com.senac.webprodutos.servlets;
 
+import com.senac.webprodutos.dao.ProdutoDAO;
+import com.senac.webprodutos.model.Categoria;
 import com.senac.webprodutos.model.Produto;
 import com.senac.webprodutos.service.ServicoProduto;
 import java.io.IOException;
@@ -51,6 +53,7 @@ public class ConsultaProdutoServlet extends HttpServlet {
         
         //Instância de ArrayList para acumular fornecedores
         ArrayList<Produto> Lista = new ArrayList();
+        ArrayList<Categoria> Listacategoria = new ArrayList();
         
         //Instância serviço de servidor para efetuar consulta e ligação com FornecedorDAO
         ServicoProduto sp = new ServicoProduto();
@@ -65,7 +68,17 @@ public class ConsultaProdutoServlet extends HttpServlet {
             Lista = (ArrayList<Produto>) sp.consultaProdutosNome(produto);
         } catch (Exception e) {
         }
-
+        
+        ProdutoDAO produtodao = new ProdutoDAO();
+     
+        try {
+            for(int i = 0; i < Lista.size(); i++){
+            Listacategoria.add(produtodao.encontraCategoriasProd(Lista.get(i).getId()));
+            }
+        } catch (Exception e) {
+        }
+        
+        sessao.setAttribute("ListaProdutoCategoria", Listacategoria);
         sessao.setAttribute("ListaProdutos", Lista);
         response.sendRedirect(request.getContextPath() + "/listar.jsp");   
         

@@ -77,4 +77,12 @@ public class ServicoProduto {
         }
     }
     
+        public void excluirProduto(Integer codigo) throws ProdutoException, DataSourceException {
+        try {
+            produtoDAO.deletarProduto(codigo);
+        } catch (Exception e) {
+            throw new DataSourceException("Erro na fonte de dados", e);
+        }
+    }
+    
 }
