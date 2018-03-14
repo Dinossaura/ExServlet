@@ -43,7 +43,7 @@
                              
                              
                                  <div class="form-inline">
-                                    <form class="form-group alteracoes" action="${pageContext.request.contextPath}/alterarProduto" method="post" >
+                                    <form class="form-group alteracoes" action="${pageContext.request.contextPath}/alterar-produto" method="post" >
                                         <button type="submit" name="codigoproduto" value="${produto.getId()}" 
                                                 class="btn btn-success center-block">Alterar</button>
                                     </form>

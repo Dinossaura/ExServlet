@@ -37,6 +37,18 @@ public class ServicoProduto {
         }
     }
     
+    //Atualiza um produto na fonte de dados
+    public void atualizarProduto(Produto produto) throws ProdutoException, DataSourceException {
+        ValidadorProduto.validar(produto);
+
+        try {
+            produtoDAO.updateProduto(produto);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DataSourceException("Erro na fonte de dados", e);
+        }
+    }
+    
     //Serviço entra em contato com ProdutoDAO e retorna todos produtos cadastrados
     public List<Produto> listarprodutos() throws ProdutoException,DataSourceException{
         List<Produto> lista = new ArrayList<>();
@@ -69,6 +81,18 @@ public class ServicoProduto {
         try {
             //Realiza a chamada de inserção na fonte de dados
             return produtoDAO.encontrarProdutoCadastro(nomeProduto);
+        } catch (Exception e) {
+            //Imprime qualquer erro técnico no console e devolve
+            //uma exceção e uma mensagem amigável a camada de visão
+            e.printStackTrace();
+            throw new DataSourceException("Erro na fonte de dados", e);
+        }
+    }
+    
+        public Produto encontrarProdutoCodigo(int codigoproduto) throws ProdutoException, DataSourceException {
+        try {
+            //Realiza a chamada de inserção na fonte de dados
+            return produtoDAO.encontrarProdutoCodigo(codigoproduto);
         } catch (Exception e) {
             //Imprime qualquer erro técnico no console e devolve
             //uma exceção e uma mensagem amigável a camada de visão

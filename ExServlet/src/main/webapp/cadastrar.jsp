@@ -4,6 +4,7 @@
     Author     : magno
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -218,44 +219,95 @@
         <div class="container text-center">
             <div class="row">              
                 <div class="col-12">
-                    <h2>Cadastro de Produtos</h2>  
-                    <form action="${pageContext.request.contextPath}/cadastrar-produto" method="post">
+                    <c:choose>
+                        <c:when test = "${empty Altera}">
+                            <h2>Cadastro de Produtos</h2>
+                        </c:when>
+                        <c:otherwise>
+                            <h2>Alteração de Produtos</h2>
+                        </c:otherwise>
+                    </c:choose>
+                            
+                    <c:choose>
+                        <c:when test = "${empty Altera}">
+                            <form action="${pageContext.request.contextPath}/cadastrar-produto" method="post">
                    
-                    <div  class="form-group col-sm-12 row">
+                            <div  class="form-group col-sm-12 row">
 
-                        <label for="produto">Produto*</label>                      
-                        <input type="text" name="produto" class="form-control" id="produto" required oninvalid="this.setCustomValidity('Preencha o nome')" oninput="setCustomValidity('')" maxlength="30"/> 
+                                <label for="produto">Produto*</label>                      
+                                <input type="text" name="produto" class="form-control" id="produto" required oninvalid="this.setCustomValidity('Preencha o nome')" oninput="setCustomValidity('')" maxlength="30"/> 
                         
-                        <label for="descricao">Descrição*</label>
-                        <textarea class="form-control" rows="1" name="descricao" id="descricao" required oninvalid="this.setCustomValidity('Preencha a Descrição')" oninput="setCustomValidity('')" maxlength="200"/></textarea> 
+                                <label for="descricao">Descrição*</label>
+                                <textarea class="form-control" rows="1" name="descricao" id="descricao" required oninvalid="this.setCustomValidity('Preencha a Descrição')" oninput="setCustomValidity('')" maxlength="200"/></textarea> 
                         
-                    </div>
+                            </div>
                         
-                    <div class="form-group col-sm-12 row">
-                        <label for="precocompra" id="labCom">Preço Compra*</label>
-                        <input class="form-control" name="precocompra" id="precocompra" onkeypress="reais(this, event)" onkeydown="backspace(this, event)" maxlength="11"/>
+                            <div class="form-group col-sm-12 row">
+                                <label for="precocompra" id="labCom">Preço Compra*</label>
+                                <input class="form-control" name="precocompra" id="precocompra" onkeypress="reais(this, event)" onkeydown="backspace(this, event)" maxlength="11"/>
 
-                        <label for="pvenda" id="labCom">Preço Venda*</label>
-                        <input class="form-control" name="precovenda" id="precoven" onkeypress="reais(this, event)" onkeydown="backspace(this, event)" maxlength="11"/>
+                                <label for="pvenda" id="labCom">Preço Venda*</label>
+                                <input class="form-control" name="precovenda" id="precoven" onkeypress="reais(this, event)" onkeydown="backspace(this, event)" maxlength="11"/>
 
-                        <label for="qtd">Quantidade*</label>
-                        <input class="form-control" name="quantidade" id="quantidaprod" onkeydown="javascript: fMasc(this, mNum)" maxlength="10" required oninvalid="this.setCustomValidity('Preencha a Quantidade')" oninput="setCustomValidity('')"/>
-                    </div>
+                                <label for="qtd">Quantidade*</label>
+                                <input class="form-control" name="quantidade" id="quantidaprod" onkeydown="javascript: fMasc(this, mNum)" maxlength="10" required oninvalid="this.setCustomValidity('Preencha a Quantidade')" oninput="setCustomValidity('')"/>
+                            </div>
                         
-                    <div class="form-group col-sm-12 row">
-                        <label for="categoria">Categoria*</label>
-                        Cat Um <input type="checkbox" name="categvalor1" value="1">
-                        Cat Dois<input type="checkbox" name="categvalor2" value="2">
-                        Cat Três<input type="checkbox" name="categvalor3" value="3">
-                        Cat Quatro<input type="checkbox" name="categvalor4" value="4">
-                        Cat Cinco<input type="checkbox" name="categvalor5" value="5">
-                    </div> 
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-default" id="botao">Cadastrar</button>
-                    </div>
-                    <label id="mensagem">(*)Campos Obrigatórios</label>
+                            <div class="form-group col-sm-12 row">
+                                <label for="categoria">Categoria*</label>
+                                Cat Um <input type="checkbox" name="categvalor1" value="1">
+                                Cat Dois<input type="checkbox" name="categvalor2" value="2">
+                                Cat Três<input type="checkbox" name="categvalor3" value="3">
+                                Cat Quatro<input type="checkbox" name="categvalor4" value="4">
+                                Cat Cinco<input type="checkbox" name="categvalor5" value="5">
+                            </div> 
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-default" id="botao">Cadastrar</button>
+                            </div>
+                            <label id="mensagem">(*)Campos Obrigatórios</label>
                     
-                    </form>
+                            </form>
+                        </c:when>
+                        <c:otherwise>
+                             <form action="${pageContext.request.contextPath}/alterar-produto" method="post">
+                   
+                            <div  class="form-group col-sm-12 row">
+
+                                <label for="produto">Produto*</label>                      
+                                <input type="text" name="produto" class="form-control" value="${pro.getNome()}" id="produto" required oninvalid="this.setCustomValidity('Preencha o nome')" oninput="setCustomValidity('')" maxlength="30"/> 
+                        
+                                <label for="descricao">Descrição*</label>
+                                <textarea class="form-control" rows="1" name="descricao" value="${pro.getDesc()}" id="descricao" required oninvalid="this.setCustomValidity('Preencha a Descrição')" oninput="setCustomValidity('')" maxlength="200"/></textarea> 
+                        
+                            </div>
+                        
+                            <div class="form-group col-sm-12 row">
+                                <label for="precocompra" id="labCom">Preço Compra*</label>
+                                <input class="form-control" name="precocompra" value="${pro.getPrecoVenda()}"  id="precocompra" onkeypress="reais(this, event)" onkeydown="backspace(this, event)" maxlength="11"/>
+
+                                <label for="pvenda" id="labCom">Preço Venda*</label>
+                                <input class="form-control" name="precovenda" value="${pro.getPrecoCompra()}" id="precoven" onkeypress="reais(this, event)" onkeydown="backspace(this, event)" maxlength="11"/>
+
+                                <label for="qtd">Quantidade*</label>
+                                <input class="form-control" name="quantidade" value="${pro.getQtde()}" id="quantidaprod" onkeydown="javascript: fMasc(this, mNum)" maxlength="10" required oninvalid="this.setCustomValidity('Preencha a Quantidade')" oninput="setCustomValidity('')"/>
+                            </div>
+                        
+                            <div class="form-group col-sm-12 row">
+                                <label for="categoria">Categoria*</label>
+                                Cat Um <input type="checkbox" name="categvalor1" value="1">
+                                Cat Dois<input type="checkbox" name="categvalor2" value="2">
+                                Cat Três<input type="checkbox" name="categvalor3" value="3">
+                                Cat Quatro<input type="checkbox" name="categvalor4" value="4">
+                                Cat Cinco<input type="checkbox" name="categvalor5" value="5">
+                            </div> 
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-default" id="botao">Cadastrar</button>
+                            </div>
+                            <label id="mensagem">(*)Campos Obrigatórios</label>
+                    
+                            </form>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
                 
             </div>
