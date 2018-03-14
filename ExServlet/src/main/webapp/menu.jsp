@@ -16,7 +16,7 @@
                                 <a class="nav-link" href="cadastrar.jsp">Cadastrar</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Listar/Alterar</a>
+                                <a class="nav-link" href="listar.jsp">Listar/Alterar</a>
                             </li>   
                         </ul>
                     </nav>
